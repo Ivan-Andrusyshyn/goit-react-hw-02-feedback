@@ -47,11 +47,10 @@ class App extends Component {
       countTotalFeedback,
       countPositiveFeedbackPercentage,
     } = this;
-    const { title } = this.props;
     const { neutral, good, bad } = this.state;
     return (
       <div className={css.container}>
-        <h1>{title}</h1>
+        <h1>Please leave feedback</h1>
         <FeedbackOptions
           hendletIncrementNeutral={hendletIncrementNeutral}
           hendletIncrementGood={hendletIncrementGood}
