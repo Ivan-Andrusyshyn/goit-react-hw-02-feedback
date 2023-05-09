@@ -1,0 +1,8 @@
+.container {
+  margin: 0 auto;
+  padding: 15px;
+  width: 500px;
+}
+.stat_title {
+  font-size: 18px;
+}

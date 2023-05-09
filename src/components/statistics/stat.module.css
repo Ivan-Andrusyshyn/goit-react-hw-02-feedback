@@ -1,0 +1,13 @@
+.stat__list {
+  padding-left: 0;
+}
+.stat__list_item {
+  border: 1px solid greenyellow;
+  padding-left: 10px;
+  list-style: none;
+  cursor: pointer;
+  transition: background-color 0.3s linear;
+}
+.stat__list_item:hover {
+  background-color: blanchedalmond;
+}

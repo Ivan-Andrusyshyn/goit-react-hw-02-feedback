@@ -1,0 +1,23 @@
+.btn_list {
+  display: flex;
+  padding-left: 0;
+  gap: 10px;
+}
+.list__item_btn {
+  list-style: none;
+}
+.btn {
+  width: 80px;
+  cursor: pointer;
+  height: 30px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: yellowgreen;
+  transition: transform, background-color, 0.4s linear;
+}
+.btn:hover {
+  transform: scale(1.1);
+  background-color: rgba(153, 205, 50, 0.63);
+}
