@@ -2,27 +2,18 @@
 import { Statistics } from "./components/statistics/statistic";
 import { FeedbackOptions } from "./components/feedbackOpt/options";
 import React, { Component } from "react";
-import css from "./app.module.css";
+import { Notification } from "components/notification/notif";
+import { Section } from "components/section";
 class App extends Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
-  hendletIncrementNeutral = (e) => {
-    let count = this.state.neutral;
-    count += 1;
-    this.setState({ neutral: count });
-  };
-  hendletIncrementGood = (e) => {
-    let count = this.state.good;
-    count += 1;
-    this.setState({ good: count });
-  };
-  hendletIncrementBad = (e) => {
-    let count = this.state.bad;
-    count += 1;
-    this.setState({ bad: count });
+
+  hendlerIncrement = (e) => {
+    const { id } = e.target;
+    this.setState((prevState) => ({ [id]: prevState[id] + 1 }));
   };
   countTotalFeedback = () => {
     const { good, bad, neutral } = this.state;
@@ -32,30 +23,19 @@ class App extends Component {
   countPositiveFeedbackPercentage = () => {
     const { good, bad, neutral } = this.state;
     let percGood = good / (good + bad + neutral);
-    if (good) {
-      return percGood * 100;
-    } else {
-      return (percGood = 0);
-    }
+    return good ? Math.floor(percGood * 100) : 0;
   };
 
   render() {
     const {
-      hendletIncrementNeutral,
-      hendletIncrementGood,
-      hendletIncrementBad,
+      hendlerIncrement,
       countTotalFeedback,
       countPositiveFeedbackPercentage,
     } = this;
     const { neutral, good, bad } = this.state;
     return (
-      <div className={css.container}>
-        <h1>Please leave feedback</h1>
-        <FeedbackOptions
-          hendletIncrementNeutral={hendletIncrementNeutral}
-          hendletIncrementGood={hendletIncrementGood}
-          hendletIncrementBad={hendletIncrementBad}
-        />
+      <Section title={"Please leave feedback"}>
+        <FeedbackOptions hendlerIncrement={hendlerIncrement} />
         <h2>Statistics</h2>
         {countTotalFeedback() ? (
           <Statistics
@@ -63,14 +43,12 @@ class App extends Component {
             good={good}
             bad={bad}
             countTotalFeedback={countTotalFeedback()}
-            countPositiveFeedbackPercentage={Math.floor(
-              countPositiveFeedbackPercentage()
-            )}
+            countPositiveFeedbackPercentage={countPositiveFeedbackPercentage()}
           />
         ) : (
-          <p className={css.stat_title}>No feedback given</p>
+          <Notification message={"There is no feedback"} />
         )}
-      </div>
+      </Section>
     );
   }
 }
