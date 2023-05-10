@@ -12,5 +12,8 @@ const Section = ({ title, children }) => {
 export { Section };
 Section.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.array,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };

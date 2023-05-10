@@ -34,21 +34,28 @@ class App extends Component {
     } = this;
     const { neutral, good, bad } = this.state;
     return (
-      <Section title={"Please leave feedback"}>
-        <FeedbackOptions hendlerIncrement={hendlerIncrement} />
-        <h2>Statistics</h2>
-        {countTotalFeedback() ? (
-          <Statistics
-            neutral={neutral}
-            good={good}
-            bad={bad}
-            countTotalFeedback={countTotalFeedback()}
-            countPositiveFeedbackPercentage={countPositiveFeedbackPercentage()}
+      <div>
+        <Section title={"Please leave feedback"}>
+          <FeedbackOptions
+            hendlerIncrement={hendlerIncrement}
+            options={Object.keys(this.state)}
           />
-        ) : (
-          <Notification message={"There is no feedback"} />
-        )}
-      </Section>
+        </Section>
+        <Section>
+          <h2>Statistics</h2>
+          {countTotalFeedback() ? (
+            <Statistics
+              neutral={neutral}
+              good={good}
+              bad={bad}
+              countTotalFeedback={countTotalFeedback()}
+              countPositiveFeedbackPercentage={countPositiveFeedbackPercentage()}
+            />
+          ) : (
+            <Notification message={"There is no feedback"} />
+          )}
+        </Section>
+      </div>
     );
   }
 }

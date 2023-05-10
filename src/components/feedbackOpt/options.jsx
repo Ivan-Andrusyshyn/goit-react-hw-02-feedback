@@ -1,27 +1,25 @@
 import css from "./options.module.css";
 import PropTypes from "prop-types";
-const FeedbackOptions = ({ hendlerIncrement }) => {
+const FeedbackOptions = ({ hendlerIncrement, options }) => {
   return (
     <ul className={css.btn_list}>
-      <li className={css.list__item_btn}>
-        <button className={css.btn} onClick={hendlerIncrement} id="good">
-          Good
-        </button>
-      </li>
-      <li className={css.list__item_btn}>
-        <button className={css.btn} onClick={hendlerIncrement} id="neutral">
-          Neutral
-        </button>
-      </li>
-      <li className={css.list__item_btn}>
-        <button className={css.btn} onClick={hendlerIncrement} id="bad">
-          Bad
-        </button>
-      </li>
+      {options.map((el) => {
+        return (
+          <li className={css.list__item_btn} key={el}>
+            <button className={css.btn} onClick={hendlerIncrement} id={el}>
+              {toUpper(el)}
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
+};
+const toUpper = (el) => {
+  return el.replace(el[0], el[0].toUpperCase());
 };
 export { FeedbackOptions };
 FeedbackOptions.propTypes = {
   hendlerIncrement: PropTypes.func,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
